@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Docker, Git & Flask — Simple Ordered Step-by-Step Tutorial | Mevi Technologies</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-mevi"><div class="container-fluid px-lg-4">
+<a class="navbar-brand d-flex align-items-center gap-2" href="#top"><img src="https://www.mevitechnologies.com/static/img/MeviLOGO.png" alt="Mevi Technologies logo"><span>MEVI TECHNOLOGIES<small>TRAINING · DEVELOPMENT · CONSULTANCY</small></span></a>
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="nav"><div class="ms-auto d-flex flex-column flex-lg-row gap-2"><input id="search" class="form-control form-control-sm" placeholder="Search the notes, press Enter"><a class="btn btn-outline-light btn-sm" href="#roadmap">Learning roadmap</a><a class="btn btn-light btn-sm" href="#project">Final project</a></div></div>
+</div></nav>
+<header class="hero" id="top"><div class="container py-5"><div class="row align-items-center g-4"><div class="col-lg-8">
+<div class="eyebrow">PRACTICAL LEARNING HUB · BEGINNER TO ADVANCED</div><h1>Docker + Git + <span>Python Flask</span></h1>
+<p class="lead">A complete step-by-step tutorial: learn Docker fundamentals, work with Git and GitHub, build a Flask web application using HTML/CSS/Bootstrap/JavaScript, then package and run it with Docker.</p>
+<a class="btn btn-primary btn-lg me-2" href="#roadmap">Start tutorial <i class="bi bi-arrow-right"></i></a><a class="btn btn-outline-primary btn-lg" href="#flask-docker">Jump to Flask + Docker</a>
+<div class="hero-points mt-4"><span><i class="bi bi-check-circle"></i> Commands explained</span><span><i class="bi bi-terminal"></i> Windows, macOS & Linux</span><span><i class="bi bi-code-square"></i> Working project</span></div>
+</div><div class="col-lg-4"><div class="hero-card"><div class="hero-icon"><i class="bi bi-boxes"></i></div><h2>Learn by building</h2><p>Code → Git commit → Docker image → container → test → document.</p><div class="d-flex flex-wrap gap-2"><span class="chip">Dockerfile</span><span class="chip">Flask</span><span class="chip">GitHub</span><span class="chip">Compose</span></div></div></div></div></div></header>
+<div class="container-fluid"><div class="row">
+<aside class="col-lg-3 col-xl-2 sidebar p-3"><div class="side-title">LEARNING PATH</div><nav id="sideNav" class="nav flex-column">
+<a class="nav-link active" href="#how-to-follow">How to follow steps</a><a class="nav-link" href="#roadmap">00 · Roadmap & setup</a><a class="nav-link" href="#docker">01 · Docker fundamentals</a><a class="nav-link" href="#commands">02 · Docker commands</a><a class="nav-link" href="#dockerfile">03 · Dockerfile & images</a><a class="nav-link" href="#storage">04 · Volumes & networks</a><a class="nav-link" href="#compose">05 · Docker Compose</a><a class="nav-link" href="#git">06 · Docker with Git</a><a class="nav-link" href="#python">07 · Python setup</a><a class="nav-link" href="#flask">08 · Flask tutorial</a><a class="nav-link" href="#flaskgit">09 · Flask with Git</a><a class="nav-link" href="#flask-docker">10 · Flask with Docker</a><a class="nav-link" href="#compose-flask">11 · Flask Compose</a><a class="nav-link" href="#advanced">12 · Advanced practices</a><a class="nav-link" href="#troubleshoot">13 · Troubleshooting</a><a class="nav-link" href="#project">14 · Final project</a><a class="nav-link" href="#quiz">15 · Quiz & resources</a>
+</nav><div class="progress-card mt-4"><div class="d-flex justify-content-between"><small>Practice progress</small><strong id="progressText">0%</strong></div><div class="progress mt-2"><div id="progress" class="progress-bar" style="width:0%"></div></div><div id="practiceList" class="mt-3"></div></div></aside>
+<main class="col-lg-9 col-xl-10 main-content">
+<section class="content-section beginner-guide" id="how-to-follow"><div class="kicker">READ THIS FIRST</div><h2>How to follow every step correctly</h2><div class="callout info"><strong>Use this exact routine for every numbered step:</strong><ol class="mb-0 mt-2"><li>Read the entire step before typing anything.</li><li>Check the folder shown in the instructions. Run the command from that folder.</li><li>Copy one command block at a time into your terminal. Press Enter and wait for it to finish.</li><li>When instructions say “create a file”, open VS Code, create a file with the exact name and location, paste the code, then save it.</li><li>Compare your result with the expected result in the step. If it does not match, stop and fix the error before moving on.</li><li>Tick off the step only after it works.</li></ol></div><div class="row g-3"><div class="col-md-4"><div class="mini-guide"><strong>Terminal command</strong><p>Type it in Terminal, PowerShell or Git Bash — not inside a Python or HTML file.</p></div></div><div class="col-md-4"><div class="mini-guide"><strong>Python / HTML / CSS code</strong><p>Paste it into the named file in VS Code and save it. Do not type multi-line app code as terminal commands.</p></div></div><div class="col-md-4"><div class="mini-guide"><strong>Browser test</strong><p>Keep the server/container running, then open the exact URL given in the step.</p></div></div></div><p class="mt-3 mb-0"><strong>Folder rule:</strong> If a command says “run from the project folder”, use <code>cd</code> to enter that folder first. Use <code>pwd</code> on macOS/Linux/Git Bash or <code>Get-Location</code> in PowerShell to check where you are.</p></section>
+
+<section id="roadmap" class="content-section"><div class="kicker">START HERE</div><h2>00. Roadmap and installation</h2><p class="intro">Follow the numbered steps in sequence. Each step states what to do, the command or code, and why it matters. Keep the project files in one folder as you progress.</p>
+<div class="roadmap"><article><b>01–05</b><h3>Docker basics</h3><p>Install, run, inspect, stop and remove containers.</p></article><article><b>06–12</b><h3>Images & networking</h3><p>Build images, use Dockerfiles, volumes and networks.</p></article><article><b>13–18</b><h3>Git & GitHub</h3><p>Track changes, branch, commit, push and review code.</p></article><article><b>19–28</b><h3>Python & Flask</h3><p>Create a web page, routes, JSON endpoints and tests.</p></article><article><b>29–40</b><h3>Flask in Docker</h3><p>Build, run, debug, compose and document the app.</p></article></div>
+<h3>Step 1 — Install the tools</h3><div class="step-routine"><strong>Step 1 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><ul><li><strong>Windows:</strong> install Docker Desktop, Git for Windows, Python 3 and VS Code. PowerShell or Windows Terminal is recommended; Git Bash is useful for Bash-style commands.</li><li><strong>macOS:</strong> install Docker Desktop, Git (often available through Xcode Command Line Tools), Python 3 and VS Code.</li><li><strong>Linux:</strong> install Docker Engine and the Compose plugin using the instructions for your distribution; install Git, Python 3 and the venv package.</li></ul><p>Use official installation instructions because supported operating systems and setup steps change between versions.</p>
+<h3>Step 2 — Verify versions</h3><div class="step-routine"><strong>Step 2 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>git --version
+python --version
+python3 --version
+docker --version
+docker compose version</code><button class="copy">Copy</button></pre><p>These commands verify that command-line tools are available. On Windows, <code>py --version</code> may work when <code>python</code> does not. On macOS/Linux, use <code>python3</code> if necessary.</p>
+<h3>Step 3 — Check the Docker engine</h3><div class="step-routine"><strong>Step 3 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker info
+docker run --rm hello-world</code><button class="copy">Copy</button></pre><p><code>docker info</code> asks the Docker engine for system details. <code>hello-world</code> downloads a test image if needed, starts a short-lived container, prints a success message and removes the container because of <code>--rm</code>. If the daemon is unavailable, start Docker Desktop or the Linux Docker service first.</p>
+<div class="callout info"><strong>Terminal note:</strong> Commands are generally the same across operating systems. Linux commands that use <code>sudo</code> require elevated privileges. Windows paths and activation commands differ from macOS/Linux; examples are labelled accordingly.</div></section>
+
+<section id="docker" class="content-section"><div class="kicker">DOCKER FOUNDATIONS</div><h2>01. Docker fundamentals</h2><p class="intro">Docker packages an application and its dependencies into an image, then runs that image as a container.</p>
+<div class="diagram"><div><b>Application</b><small>Code + dependencies</small></div><i class="bi bi-arrow-right"></i><div><b>Docker image</b><small>Built from Dockerfile</small></div><i class="bi bi-arrow-right"></i><div><b>Container</b><small>Running instance</small></div></div>
+<div class="table-responsive"><table class="table table-bordered"><thead><tr><th>Term</th><th>Meaning</th><th>Remember</th></tr></thead><tbody><tr><td>Image</td><td>Versioned template containing app files and runtime layers.</td><td>Build or pull it.</td></tr><tr><td>Container</td><td>Isolated process created from an image.</td><td>Run, stop, inspect it.</td></tr><tr><td>Dockerfile</td><td>Instructions used to build an image.</td><td>Plain text file named Dockerfile.</td></tr><tr><td>Registry</td><td>Service storing and distributing images.</td><td>Docker Hub is one example.</td></tr><tr><td>Volume</td><td>Persistent storage managed by Docker.</td><td>Data can outlive a container.</td></tr><tr><td>Port mapping</td><td>Connects a host port to a container port.</td><td>Host:container.</td></tr><tr><td>Daemon/Engine</td><td>Background service that manages Docker resources.</td><td>Must be running.</td></tr></tbody></table></div>
+<h3>Step 4 — Download an image</h3><div class="step-routine"><strong>Step 4 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker pull nginx:alpine
+docker image ls
+docker image inspect nginx:alpine</code><button class="copy">Copy</button></pre><p><code>pull</code> downloads an image; <code>image ls</code> lists local images; <code>inspect</code> displays configuration and metadata. The tag <code>alpine</code> selects a particular image variant.</p>
+<h3>Step 5 — Start a web server container</h3><div class="step-routine"><strong>Step 5 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker run --name web-demo -d -p 8080:80 nginx:alpine
+docker ps
+docker ps -a</code><button class="copy">Copy</button></pre><p>Open <code>http://localhost:8080</code>. In <code>-p 8080:80</code>, 8080 is the host port and 80 is the container port. <code>-d</code> runs in the background; <code>--name</code> assigns a readable name.</p>
+<h3>Step 6 — Stop, start and remove</h3><div class="step-routine"><strong>Step 6 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker stop web-demo
+docker start web-demo
+docker logs web-demo
+docker rm -f web-demo</code><button class="copy">Copy</button></pre><p><code>stop</code> stops a running container, <code>start</code> restarts an existing stopped container, <code>logs</code> prints application output, and <code>rm -f</code> forcibly removes the named container. Removing a container does not automatically remove its image.</p>
+<h3>Step 7 — Understand containers versus virtual machines</h3><div class="step-routine"><strong>Step 7 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><ul><li>Virtual machines normally run a guest operating system on virtualised hardware.</li><li>Containers share the host kernel and isolate processes using operating-system features.</li><li>Containers are usually quick to start and lightweight, but they are not a replacement for every VM use case.</li><li>Containers still require security controls and should not be treated as perfectly isolated by default.</li></ul></section>
+
+<section id="commands" class="content-section"><div class="kicker">COMMAND-LINE PRACTICE</div><h2>02. Docker commands explained</h2>
+<div class="table-responsive"><table class="table table-striped table-bordered"><thead><tr><th>Command</th><th>Purpose</th><th>What to check</th></tr></thead><tbody><tr><td><code>docker ps</code></td><td>Lists running containers.</td><td>Status, names and ports.</td></tr><tr><td><code>docker ps -a</code></td><td>Lists running and stopped containers.</td><td>Exited containers.</td></tr><tr><td><code>docker image ls</code></td><td>Lists downloaded/built images.</td><td>Repository, tag, size.</td></tr><tr><td><code>docker logs -f NAME</code></td><td>Follows container logs.</td><td>Startup messages/errors.</td></tr><tr><td><code>docker exec -it NAME sh</code></td><td>Opens a shell in a running container, if available.</td><td>Files and environment.</td></tr><tr><td><code>docker inspect NAME</code></td><td>Displays detailed configuration.</td><td>Ports, mounts, state.</td></tr><tr><td><code>docker stats</code></td><td>Shows live resource use.</td><td>CPU and memory.</td></tr><tr><td><code>docker system df</code></td><td>Summarises Docker disk use.</td><td>Images, volumes, cache.</td></tr><tr><td><code>docker rm NAME</code></td><td>Removes a stopped container.</td><td>Container no longer listed.</td></tr><tr><td><code>docker rmi IMAGE</code></td><td>Removes an unused image.</td><td>Image no longer listed.</td></tr></tbody></table></div>
+<h3>Step 8 — Inspect a container</h3><div class="step-routine"><strong>Step 8 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker run --name inspect-demo -d -p 8081:80 nginx:alpine
+docker logs inspect-demo
+docker inspect inspect-demo
+docker stats --no-stream inspect-demo
+docker stop inspect-demo
+docker rm inspect-demo</code><button class="copy">Copy</button></pre><p>Run one command at a time and examine the output. <code>--no-stream</code> prints a single resource snapshot instead of continuously updating.</p>
+<div class="callout warning"><strong>Cleanup warning:</strong> <code>docker system prune</code> removes unused resources. Read its confirmation and options carefully. Volume pruning can delete persistent data; never run cleanup commands blindly on a machine with important workloads.</div></section>
+
+<section id="dockerfile" class="content-section"><div class="kicker">BUILD YOUR OWN IMAGE</div><h2>03. Dockerfile and image layers</h2><p>A Dockerfile describes the steps to create an image. The final dot in <code>docker build -t name:tag .</code> means the current folder is the build context.</p>
+<h3>Step 9 — Create a static website</h3><div class="step-routine"><strong>Step 9 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><p>Create a folder named <code>docker-static-demo</code>, then add <code>index.html</code>:</p><pre class="code"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Docker Demo&lt;/title&gt;
+  &lt;style&gt;body{font-family:system-ui;margin:3rem;background:#eef5ff;color:#18345d}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello from Docker!&lt;/h1&gt;
+  &lt;p&gt;This page is served from an Nginx container.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code><button class="copy">Copy</button></pre>
+<h3>Step 10 — Write the Dockerfile</h3><div class="step-routine"><strong>Step 10 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80</code><button class="copy">Copy</button></pre><ol><li><code>FROM</code> selects a base image.</li><li><code>COPY</code> copies the local HTML file into Nginx's document directory.</li><li><code>EXPOSE</code> documents the expected container port; it does not publish a host port by itself.</li></ol>
+<h3>Step 11 — Add .dockerignore</h3><div class="step-routine"><strong>Step 11 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>.git
+.venv
+__pycache__
+*.pyc
+.env
+.env.*
+node_modules
+.DS_Store</code><button class="copy">Copy</button></pre><p>This prevents selected files from being sent as part of the build context. Never bake real credentials or secret files into an image.</p>
+<h3>Step 12 — Build and run the image</h3><div class="step-routine"><strong>Step 12 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker build -t mevi-static-site:1.0 .
+docker image ls
+docker run --name mevi-site -d -p 8082:80 mevi-static-site:1.0</code><button class="copy">Copy</button></pre><p>Open <code>http://localhost:8082</code>. The <code>-t</code> flag gives the image a name and version tag.</p>
+<h3>Step 13 — Rebuild after editing</h3><div class="step-routine"><strong>Step 13 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker build -t mevi-static-site:1.1 .
+docker rm -f mevi-site
+docker run --name mevi-site -d -p 8082:80 mevi-static-site:1.1</code><button class="copy">Copy</button></pre><p>Changing a source file does not change an already-built image or existing container. Rebuild the image and recreate the container to use the new version.</p>
+<h3>Common Dockerfile instructions</h3><div class="table-responsive"><table class="table table-bordered"><tbody><tr><th>FROM</th><td>Selects the base image.</td></tr><tr><th>WORKDIR</th><td>Sets the working directory inside the image.</td></tr><tr><th>COPY</th><td>Copies files from the build context.</td></tr><tr><th>RUN</th><td>Executes a build-time command, often package installation.</td></tr><tr><th>ENV</th><td>Sets environment variables; do not bake secrets into images.</td></tr><tr><th>USER</th><td>Selects the user for subsequent execution.</td></tr><tr><th>EXPOSE</th><td>Documents a listening port.</td></tr><tr><th>CMD</th><td>Provides the default container command/arguments.</td></tr><tr><th>ENTRYPOINT</th><td>Defines the main executable for the container.</td></tr></tbody></table></div></section>
+
+<section id="storage" class="content-section"><div class="kicker">DATA AND CONNECTIVITY</div><h2>04. Volumes and networks</h2><h3>Step 14 — Understand persistent storage</h3><div class="step-routine"><strong>Step 14 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><p>A container's writable layer belongs to that container. If the container is removed, data stored only in that layer can be lost.</p><ul><li><strong>Named volume:</strong> Docker-managed persistent storage, often useful for database data.</li><li><strong>Bind mount:</strong> maps a host directory/file into a container, useful for local development.</li><li><strong>tmpfs:</strong> temporary in-memory storage on supported platforms.</li></ul>
+<h3>Step 15 — Create and test a volume</h3><div class="step-routine"><strong>Step 15 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker volume create mevi-data
+docker volume ls
+docker volume inspect mevi-data
+docker run --rm -v mevi-data:/data alpine sh -c "echo 'persistent note' > /data/note.txt"
+docker run --rm -v mevi-data:/data alpine cat /data/note.txt</code><button class="copy">Copy</button></pre><p>The first temporary container writes to the volume; the second reads the same file. This shows that the data can outlive both containers.</p>
+<h3>Step 16 — Create a user-defined network</h3><div class="step-routine"><strong>Step 16 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker network create mevi-net
+docker network ls
+docker run -d --name web-net --network mevi-net nginx:alpine
+docker network inspect mevi-net
+docker rm -f web-net
+docker network rm mevi-net</code><button class="copy">Copy</button></pre><p>Containers on a user-defined network can usually reach one another by container/service name. Publish only ports that need to be reached from outside the Docker network.</p>
+<div class="callout info">In <code>-p 127.0.0.1:5000:8000</code>, the host-side service is bound to loopback and intended for local access. Binding to all host interfaces can expose the service to other devices, depending on firewall and network settings.</div></section>
+
+<section id="compose" class="content-section"><div class="kicker">MULTI-CONTAINER APPLICATIONS</div><h2>05. Docker Compose</h2><p>Compose describes multiple services in YAML, so the app's containers and settings can be started together.</p><h3>Step 17 — Create compose.yaml</h3><div class="step-routine"><strong>Step 17 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8083:80"
+  helper:
+    image: alpine
+    command: ["sh", "-c", "echo Compose is running; sleep 3600"]</code><button class="copy">Copy</button></pre><p>Each key under <code>services</code> describes a service. Services can define images, builds, ports, environment variables, volumes, networks and health checks.</p><h3>Step 18 — Run the Compose stack</h3><div class="step-routine"><strong>Step 18 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker compose config
+docker compose up -d
+docker compose ps
+docker compose logs -f
+docker compose down</code><button class="copy">Copy</button></pre><p><code>config</code> validates the YAML, <code>up -d</code> starts services in the background, <code>ps</code> lists service containers, <code>logs -f</code> follows logs, and <code>down</code> removes containers and networks created for the stack. Named volumes are normally retained unless explicitly removed.</p></section>
+
+<section id="git" class="content-section"><div class="kicker">VERSION CONTROL</div><h2>06. Docker with Git and GitHub</h2><p>Git records source-code history. GitHub hosts a remote repository and supports collaboration. Docker builds an image from a chosen version of the source.</p><h3>Step 19 — Create a local Git repository</h3><div class="step-routine"><strong>Step 19 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>mkdir mevi-docker-flask
+cd mevi-docker-flask
+git init
+git branch -M main
+git status</code><button class="copy">Copy</button></pre><p><code>git init</code> creates repository metadata, <code>branch -M main</code> renames the current branch, and <code>status</code> shows untracked, staged and modified files.</p>
+<h3>Step 20 — Create .gitignore</h3><div class="step-routine"><strong>Step 20 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.coverage
+.DS_Store
+Thumbs.db</code><button class="copy">Copy</button></pre><p>Save this as <code>.gitignore</code>. It prevents selected local files from being tracked by Git. Never commit passwords, API tokens, private keys or a real <code>.env</code> file. If a secret was committed, rotate/revoke it; deleting it later is not enough.</p>
+<h3>Step 21 — Stage, review and commit</h3><div class="step-routine"><strong>Step 21 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>git add README.md .gitignore
+git diff --staged
+git commit -m "Add project documentation and ignore rules"
+git log --oneline</code><button class="copy">Copy</button></pre><p><code>git add</code> stages selected changes; <code>git diff --staged</code> shows what will enter the commit; <code>git commit</code> records the staged snapshot. Review the diff before committing.</p>
+<h3>Step 22 — Connect to GitHub</h3><div class="step-routine"><strong>Step 22 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><ol><li>Create a repository on GitHub. For an existing local project, create an empty remote repository to avoid unrelated initial histories.</li><li>Copy its URL and replace the example username below.</li></ol><pre class="code"><code>git remote add origin https://github.com/YOUR-USERNAME/mevi-docker-flask.git
+git remote -v
+git push -u origin main</code><button class="copy">Copy</button></pre><p>GitHub may authenticate using a browser, credential manager or SSH key. Your regular GitHub account password is not normally used directly for HTTPS Git operations.</p>
+<h3>Step 23 — Work on a feature branch</h3><div class="step-routine"><strong>Step 23 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>git switch -c feature/dockerfile
+# Create or edit Dockerfile and .dockerignore
+git status
+git diff
+git add Dockerfile .dockerignore
+git diff --staged
+git commit -m "Add Docker image build instructions"
+git push -u origin feature/dockerfile</code><button class="copy">Copy</button></pre><p>Open a pull request to review the branch before merging. Small, focused commits make changes easier to understand and revert.</p>
+<h3>Step 24 — Push an image to a registry</h3><div class="step-routine"><strong>Step 24 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker build -t YOUR-DOCKERHUB-USER/mevi-demo:1.0 .
+docker login
+docker push YOUR-DOCKERHUB-USER/mevi-demo:1.0</code><button class="copy">Copy</button></pre><p>Use your actual registry username. Authenticate interactively; do not put passwords or access tokens in shell history. Version tags should be intentional. The <code>latest</code> tag is just a tag name and does not guarantee it is newest everywhere.</p></section>
+
+<section id="python" class="content-section"><div class="kicker">PYTHON SETUP</div><h2>07. Python foundations for Flask</h2><p>Flask is a Python web framework. Useful foundations include imports, functions, dictionaries, exceptions, modules, packages and environment variables.</p><h3>Step 25 — Create a virtual environment</h3><div class="step-routine"><strong>Step 25 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><div class="row g-3"><div class="col-md-6"><h4>Windows PowerShell</h4><pre class="code"><code>py -m venv .venv
+.\\.venv\\Scripts\\Activate.ps1
+python --version</code><button class="copy">Copy</button></pre></div><div class="col-md-6"><h4>macOS / Linux</h4><pre class="code"><code>python3 -m venv .venv
+source .venv/bin/activate
+python --version</code><button class="copy">Copy</button></pre></div></div><p>A virtual environment keeps project packages separate from other Python projects. When active, your prompt may show <code>(.venv)</code>. If PowerShell blocks activation, follow your organisation's policy or use Command Prompt activation; avoid changing system-wide security settings without understanding the effect.</p>
+<h3>Step 26 — Install Flask and record dependencies</h3><div class="step-routine"><strong>Step 26 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>python -m pip install --upgrade pip
+python -m pip install Flask
+python -m pip freeze > requirements.txt</code><button class="copy">Copy</button></pre><p><code>python -m pip</code> runs pip for the selected interpreter. <code>requirements.txt</code> records installed versions. For production, review and pin a tested dependency set rather than freezing unrelated global packages.</p>
+<h3>Python concepts used in this project</h3><ul><li><strong>Module:</strong> a Python file that can be imported.</li><li><strong>Function:</strong> reusable code defined with <code>def</code>.</li><li><strong>Dictionary:</strong> key-value data structure, often returned as JSON.</li><li><strong>Exception:</strong> an error condition handled with <code>try/except</code>.</li><li><strong>Environment variable:</strong> configuration supplied outside source code.</li><li><strong>Dependency:</strong> a package the application needs.</li></ul></section>
+
+<section id="flask" class="content-section"><div class="kicker">BUILD A WEB APPLICATION</div><h2>08. Python Flask tutorial</h2><p>Flask maps incoming HTTP requests to Python functions called route handlers. A handler can return HTML, JSON, text or a redirect.</p><h3>Step 27 — Create the project structure</h3><div class="step-routine"><strong>Step 27 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>mevi-docker-flask/
+├── app.py
+├── requirements.txt
+├── templates/
+│   └── index.html
+├── static/
+│   └── style.css
+├── .gitignore
+└── README.md</code><button class="copy">Copy</button></pre><p><code>templates/</code> contains HTML templates. <code>static/</code> contains CSS, JavaScript and images. Flask uses these folder names by default.</p>
+<h3>Step 28 — Write app.py</h3><div class="step-routine"><strong>Step 28 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>from flask import Flask, jsonify, render_template
+
+app = Flask(__name__)
+
+@app.get("/")
+def home():
+    return render_template("index.html")
+
+@app.get("/health")
+def health():
+    return jsonify(status="ok", application="Mevi Flask Demo")
+
+@app.get("/api/greet/&lt;name&gt;")
+def greet(name):
+    return jsonify(message=f"Hello, {name}!")
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=5000, debug=True)</code><button class="copy">Copy</button></pre><ol><li><code>Flask(__name__)</code> creates the application and helps Flask locate resources.</li><li><code>@app.get("/")</code> registers a handler for HTTP GET requests to the root path.</li><li><code>render_template</code> loads and renders <code>templates/index.html</code>.</li><li><code>jsonify</code> returns a JSON response, useful for API endpoints and health checks.</li><li><code>&lt;name&gt;</code> is a dynamic route parameter passed to the function.</li><li>The final block starts Flask's development server when this file is run directly. Debug mode is for local development only.</li></ol>
+<h3>Step 29 — Create the HTML page with Bootstrap and JavaScript</h3><div class="step-routine"><strong>Step 29 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><p>Create <code>templates/index.html</code>. Bootstrap supplies responsive layout and controls, custom CSS adds visual styling, and JavaScript handles the greeting interaction.</p><pre class="code"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Mevi Flask Demo&lt;/title&gt;
+  &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+  &lt;link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;nav class="navbar navbar-dark bg-primary"&gt;
+    &lt;div class="container"&gt;&lt;span class="navbar-brand"&gt;Mevi Technologies | Flask Demo&lt;/span&gt;&lt;/div&gt;
+  &lt;/nav&gt;
+  &lt;main class="container py-5"&gt;
+    &lt;div class="p-4 p-md-5 bg-white rounded-4 shadow-sm"&gt;
+      &lt;h1&gt;My first Flask application&lt;/h1&gt;
+      &lt;p class="lead"&gt;Python powers the backend. Bootstrap styles the page.&lt;/p&gt;
+      &lt;label for="visitor" class="form-label"&gt;Enter your name&lt;/label&gt;
+      &lt;input id="visitor" class="form-control mb-3" placeholder="Enter your name"&gt;
+      &lt;button id="greetBtn" class="btn btn-primary"&gt;Greet me&lt;/button&gt;
+      &lt;p id="message" class="mt-3" aria-live="polite"&gt;&lt;/p&gt;
+      &lt;a href="/health"&gt;Check health endpoint&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+  &lt;script&gt;
+    document.getElementById("greetBtn").addEventListener("click", () =&gt; {
+      const name = document.getElementById("visitor").value.trim();
+      document.getElementById("message").textContent =
+        name ? `Hello, ${name}! Flask is serving this page.` : "Please enter your name.";
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code><button class="copy">Copy</button></pre><p>The example uses <code>textContent</code> to display user input rather than inserting it as HTML, which is a safer default.</p>
+<h3>Step 30 — Add CSS</h3><div class="step-routine"><strong>Step 30 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><p>Create <code>static/style.css</code>:</p><pre class="code"><code>body {
+  background: linear-gradient(135deg, #edf4ff, #f7f9fc);
+  color: #17233f;
+  min-height: 100vh;
+}
+main h1 { font-weight: 800; letter-spacing: -0.03em; }
+#message { color: #0b765b; font-weight: 600; }</code><button class="copy">Copy</button></pre>
+<h3>Step 31 — Run and test Flask locally</h3><div class="step-routine"><strong>Step 31 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>python app.py</code><button class="copy">Copy</button></pre><p>Open <code>http://127.0.0.1:5000</code>. Test:</p><ul><li><code>/</code> — HTML home page.</li><li><code>/health</code> — JSON status response.</li><li><code>/api/greet/Mevi</code> — JSON greeting.</li></ul><p>Stop the server with Ctrl+C. If port 5000 is occupied, change the local port or stop the conflicting process.</p>
+<h3>HTTP and Flask terms</h3><div class="table-responsive"><table class="table table-bordered"><tbody><tr><th>Request</th><td>Message sent by a browser/client to a server.</td></tr><tr><th>Response</th><td>Server reply containing a status code, headers and possibly a body.</td></tr><tr><th>GET</th><td>HTTP method generally used to retrieve a resource.</td></tr><tr><th>Route</th><td>URL pattern mapped to a handler function.</td></tr><tr><th>Template</th><td>HTML rendered by Flask/Jinja.</td></tr><tr><th>Static file</th><td>CSS, JavaScript or image served as a file.</td></tr><tr><th>JSON</th><td>Text-based data format frequently used by web APIs.</td></tr></tbody></table></div></section>
+
+<section id="flaskgit" class="content-section"><div class="kicker">SOURCE CONTROL WORKFLOW</div><h2>09. Flask with Git</h2><h3>Step 32 — Commit the working Flask app</h3><div class="step-routine"><strong>Step 32 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>git status
+git add app.py templates/index.html static/style.css requirements.txt .gitignore
+git diff --staged
+git commit -m "Build initial Flask greeting application"</code><button class="copy">Copy</button></pre><p>Stage source files and dependency manifests. Do not commit <code>.venv/</code>, Python caches or local secret files. Keep commits small and focused.</p>
+<h3>Step 33 — Create a feature branch</h3><div class="step-routine"><strong>Step 33 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>git switch -c feature/greeting-validation
+# Make a change to the application or template
+git status
+git diff
+git add app.py templates/index.html
+git commit -m "Improve greeting input validation"
+git push -u origin feature/greeting-validation</code><button class="copy">Copy</button></pre><p>Open a pull request, review the diff, run tests and merge when checks pass. Branches let you work on changes without immediately changing the shared main branch.</p>
+<h3>Step 34 — Add an automated test</h3><div class="step-routine"><strong>Step 34 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><p>Install pytest with <code>python -m pip install pytest</code>. Create <code>test_app.py</code>:</p><pre class="code"><code>from app import app
+
+def test_health_endpoint():
+    app.config["TESTING"] = True
+    client = app.test_client()
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.get_json()["status"] == "ok"
+
+def test_home_page():
+    app.config["TESTING"] = True
+    client = app.test_client()
+    response = client.get("/")
+    assert response.status_code == 200</code><button class="copy">Copy</button></pre><p>Run <code>python -m pytest</code>. Flask's test client sends requests to the app without requiring a public server. Add tests for error cases as your app grows.</p></section>
+
+<section id="flask-docker" class="content-section"><div class="kicker">CONTAINERISE FLASK</div><h2>10. Flask with Docker — step by step</h2><p>Now package the Flask app, templates, static assets and Python dependencies into a Docker image. Use a production-oriented WSGI server in the container rather than Flask's development server.</p>
+<h3>Step 35 — Prepare requirements.txt</h3><div class="step-routine"><strong>Step 35 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>Flask&gt;=3.0,&lt;4.0
+gunicorn&gt;=22,&lt;24</code><button class="copy">Copy</button></pre><p>Gunicorn is a WSGI server commonly used on Linux. These are example version ranges, not a fully locked dependency set. Test compatible versions and pin a reviewed set for reproducible production builds.</p>
+<h3>Step 36 — Understand the container host binding</h3><div class="step-routine"><strong>Step 36 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><p>The local development example binds to <code>127.0.0.1</code> intentionally. Inside a container, a service that should receive forwarded traffic must listen on the container interface, commonly <code>0.0.0.0</code>. The Dockerfile below runs Gunicorn on <code>0.0.0.0:8000</code>.</p>
+<h3>Step 37 — Create the Dockerfile</h3><div class="step-routine"><strong>Step 37 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app.py .
+COPY templates/ ./templates/
+COPY static/ ./static/
+
+RUN useradd --create-home --shell /usr/sbin/nologin appuser
+USER appuser
+
+EXPOSE 8000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "2", "app:app"]</code><button class="copy">Copy</button></pre><p><strong>Instruction explanations:</strong></p><ol><li><code>FROM</code> selects a slim Python base image.</li><li><code>PYTHONDONTWRITEBYTECODE</code> prevents Python bytecode files from being written.</li><li><code>PYTHONUNBUFFERED</code> helps logs appear promptly.</li><li><code>WORKDIR</code> sets the working directory inside the image.</li><li><code>COPY requirements.txt</code> copies dependency definitions first, allowing Docker to reuse the install layer when app code changes.</li><li><code>RUN pip install</code> installs packages while building the image.</li><li>The next <code>COPY</code> instructions add the Python module, templates and static assets.</li><li><code>USER appuser</code> runs the application as a non-root user.</li><li><code>EXPOSE 8000</code> documents the container port; it does not publish it to the host.</li><li><code>CMD</code> starts Gunicorn. <code>app:app</code> means module <code>app.py</code> and Flask object named <code>app</code>.</li></ol>
+<h3>Step 38 — Create .dockerignore</h3><div class="step-routine"><strong>Step 38 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>.git
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.coverage
+.DS_Store
+Thumbs.db</code><button class="copy">Copy</button></pre><p>This keeps unnecessary local files and secrets out of the build context. Exclude test files only if that matches your build strategy; some teams use a dedicated test stage.</p>
+<h3>Step 39 — Build the image</h3><div class="step-routine"><strong>Step 39 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker build -t mevi-flask-app:1.0 .
+docker image ls</code><button class="copy">Copy</button></pre><p>The command builds an image named <code>mevi-flask-app</code> with tag <code>1.0</code>. If the build fails, find the first failing instruction, check the file paths and inspect the error immediately above it.</p>
+<h3>Step 40 — Run the Flask container</h3><div class="step-routine"><strong>Step 40 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker run --name mevi-flask -d -p 127.0.0.1:5000:8000 mevi-flask-app:1.0
+docker ps
+docker logs mevi-flask</code><button class="copy">Copy</button></pre><p>Open <code>http://127.0.0.1:5000</code>. Host port 5000 forwards to container port 8000. Binding the host port to loopback helps keep this practice service local.</p>
+<h3>Step 41 — Verify the endpoints</h3><div class="step-routine"><strong>Step 41 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>curl http://127.0.0.1:5000/health
+curl http://127.0.0.1:5000/api/greet/Mevi
+docker logs --tail 100 mevi-flask
+docker inspect mevi-flask</code><button class="copy">Copy</button></pre><p>On Windows PowerShell, use <code>curl.exe</code> if <code>curl</code> is an alias. You can also test in a browser. Confirm the HTTP response and body, not just that the container status says “Up.”</p>
+<h3>Step 42 — Rebuild and replace after a code change</h3><div class="step-routine"><strong>Step 42 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker stop mevi-flask
+docker rm mevi-flask
+docker build -t mevi-flask-app:1.1 .
+docker run --name mevi-flask -d -p 127.0.0.1:5000:8000 mevi-flask-app:1.1</code><button class="copy">Copy</button></pre><p>Rebuilding an image does not update containers that already exist. Create a new container from the new image tag to run the updated code.</p></section>
+
+<section id="compose-flask" class="content-section"><div class="kicker">LOCAL APP STACK</div><h2>11. Flask with Docker Compose</h2><h3>Step 43 — Create compose.yaml</h3><div class="step-routine"><strong>Step 43 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>services:
+  web:
+    build: .
+    image: mevi-flask-app:compose
+    ports:
+      - "127.0.0.1:5000:8000"
+    environment:
+      APP_ENV: development
+    restart: unless-stopped</code><button class="copy">Copy</button></pre><p><code>build: .</code> builds from the current directory. <code>image</code> names the resulting image. <code>ports</code> publishes host port 5000 to container port 8000. <code>environment</code> supplies configuration; the app must read a variable for it to change behaviour. A restart policy is not a substitute for monitoring or health checks.</p>
+<h3>Step 44 — Start and manage the stack</h3><div class="step-routine"><strong>Step 44 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><pre class="code"><code>docker compose config
+docker compose up --build -d
+docker compose ps
+docker compose logs -f web
+docker compose down</code><button class="copy">Copy</button></pre><p>Use Ctrl+C to stop following the logs; this does not necessarily stop services. <code>docker compose down</code> stops and removes the Compose containers and network.</p>
+<h3>Step 45 — Add an optional health check</h3><div class="step-routine"><strong>Step 45 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><p>Add this under the <code>web</code> service in <code>compose.yaml</code>:</p><pre class="code"><code>healthcheck:
+  test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)"]
+  interval: 30s
+  timeout: 5s
+  retries: 3
+  start_period: 10s</code><button class="copy">Copy</button></pre><p>This makes an HTTP request from inside the container. A health status is useful information, but it cannot automatically repair application logic or guarantee the whole system is healthy.</p></section>
+
+<section id="advanced" class="content-section"><div class="kicker">ADVANCED PRACTICES</div><h2>12. Production-minded Docker and Flask</h2><h3>Step 46 — Configuration and secrets</h3><div class="step-routine"><strong>Step 46 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><ul><li>Keep configuration outside source code and supply it through environment variables or a secrets manager.</li><li>Commit an <code>.env.example</code> with placeholder values only; never commit real credentials.</li><li>Do not bake secrets into an image with <code>ENV</code>, <code>ARG</code> or copied files.</li><li>Use your hosting platform's secret facility and limit who can read secrets.</li></ul>
+<h3>Step 47 — Optimise images</h3><div class="step-routine"><strong>Step 47 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><ul><li>Choose a supported base image that meets compatibility needs.</li><li>Copy dependency manifests before frequently changing application code to improve cache reuse.</li><li>Use <code>.dockerignore</code> to exclude virtual environments, caches and secret files.</li><li>Review and update dependencies regularly; test updates instead of ignoring security fixes.</li><li>Consider multi-stage builds when build tools are not needed at runtime.</li></ul>
+<h3>Step 48 — Security checklist</h3><div class="step-routine"><strong>Step 48 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><ul><li>Run as a non-root user wherever practical.</li><li>Use trusted base images and review their provenance.</li><li>Scan dependencies and images for known vulnerabilities.</li><li>Do not publish database/admin ports by default.</li><li>Use HTTPS at the appropriate ingress or reverse-proxy layer for public deployments.</li><li>Never use Flask debug mode or the development server in production.</li><li>Limit registry credentials and deployment-token permissions.</li><li>Monitor CPU, memory, disk use, request failures and application logs.</li></ul>
+<h3>Step 49 — Basic GitHub Actions CI</h3><div class="step-routine"><strong>Step 49 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><p>CI automatically tests code changes. Create <code>.github/workflows/test.yml</code>:</p><pre class="code"><code>name: Flask tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install pytest
+      - name: Run tests
+        run: python -m pytest</code><button class="copy">Copy</button></pre><p>For a real pipeline, review action versions and permissions; some security policies require pinning actions to immutable commit SHAs. Add linting and security scans. Publish an image only after tests pass, and store registry credentials in GitHub secrets.</p>
+<h3>Step 50 — Understand release environments</h3><div class="step-routine"><strong>Step 50 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><ul><li><strong>Development:</strong> rapid iteration and local debugging.</li><li><strong>Staging:</strong> environment resembling production for final validation.</li><li><strong>Production:</strong> live service with access controls, monitoring and backups.</li><li><strong>Rolling deployment:</strong> replace instances gradually.</li><li><strong>Blue-green deployment:</strong> validate a second environment before switching traffic.</li><li><strong>Rollback:</strong> return to a known-good release if a new version fails.</li></ul><div class="callout warning">These notes are designed for local learning. Before exposing an app publicly, review TLS, authentication, input validation, dependency security, secrets, backups, logging and monitoring.</div></section>
+
+<section id="troubleshoot" class="content-section"><div class="kicker">DEBUG SYSTEMATICALLY</div><h2>13. Troubleshooting guide</h2><div class="accordion" id="troubleshooting">
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#err1">Docker daemon is not running</button></h3><div id="err1" class="accordion-collapse collapse show" data-bs-parent="#troubleshooting"><div class="accordion-body">Start Docker Desktop on Windows/macOS or the Docker Engine service on Linux. Then run <code>docker info</code>. Linux service commands vary by distribution.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#err2">Port is already allocated</button></h3><div id="err2" class="accordion-collapse collapse" data-bs-parent="#troubleshooting"><div class="accordion-body">Another process/container uses that host port. Check <code>docker ps</code>, stop the conflicting container if appropriate, or use a different host port such as <code>127.0.0.1:5001:8000</code>.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#err3">Container exits immediately</button></h3><div id="err3" class="accordion-collapse collapse" data-bs-parent="#troubleshooting"><div class="accordion-body">Run <code>docker ps -a</code> and <code>docker logs CONTAINER</code>. Containers stop when their main process exits. Check the command, imports, dependencies and configuration.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#err4">Flask page shows connection refused</button></h3><div id="err4" class="accordion-collapse collapse" data-bs-parent="#troubleshooting"><div class="accordion-body">Check container status and logs, verify the app listens on the expected container port, and confirm host-to-container port mapping. Binding only to 127.0.0.1 inside the container may prevent forwarded traffic reaching it.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#err5">ModuleNotFoundError: Flask or Gunicorn</button></h3><div id="err5" class="accordion-collapse collapse" data-bs-parent="#troubleshooting"><div class="accordion-body">Check <code>requirements.txt</code>, rebuild after dependency changes, and confirm the Dockerfile installs from the intended file. Locally, activate the correct virtual environment.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#err6">TemplateNotFound: index.html</button></h3><div id="err6" class="accordion-collapse collapse" data-bs-parent="#troubleshooting"><div class="accordion-body">Flask expects templates in a folder named <code>templates</code> by default. Check spelling and case, and ensure the Dockerfile copies the directory into the image.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#err7">Code changes are not visible</button></h3><div id="err7" class="accordion-collapse collapse" data-bs-parent="#troubleshooting"><div class="accordion-body">A normal image contains a snapshot of files. Rebuild the image and recreate the container. A bind mount can be used for local development if configured intentionally.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#err8">Git says nothing to commit</button></h3><div id="err8" class="accordion-collapse collapse" data-bs-parent="#troubleshooting"><div class="accordion-body">Run <code>git status</code>. The file may not have changed, may already be committed, or may be ignored. Use <code>git check-ignore -v path/to/file</code> to identify the matching ignore rule.</div></div></div>
+</div><h3>Step 51 — Follow a repeatable debugging sequence</h3><div class="step-routine"><strong>Step 51 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><ol><li>Reproduce the issue and note the exact command or URL.</li><li>Check status using <code>docker ps -a</code>.</li><li>Read logs with <code>docker logs</code> or <code>docker compose logs</code>.</li><li>Inspect ports, environment and mounts using <code>docker inspect</code>.</li><li>Change one thing at a time, rebuild/restart and retest.</li><li>Record the root cause and solution in README or an issue tracker.</li></ol></section>
+
+<section id="project" class="content-section"><div class="kicker">CAPSTONE PROJECT</div><h2>14. Build the Mevi Flask Docker Starter</h2><p class="intro">Goal: build a Flask app, track it with Git, containerise it, run it with Compose and document it on GitHub.</p><div class="project-panel"><h3>Acceptance checklist</h3><div id="projectChecks" class="row g-2"><div class="col-md-6"><label class="task"><input type="checkbox"> Python virtual environment created</label></div><div class="col-md-6"><label class="task"><input type="checkbox"> Flask home page works locally</label></div><div class="col-md-6"><label class="task"><input type="checkbox"> Health endpoint returns JSON</label></div><div class="col-md-6"><label class="task"><input type="checkbox"> Git commits and README added</label></div><div class="col-md-6"><label class="task"><input type="checkbox"> Dockerfile and .dockerignore created</label></div><div class="col-md-6"><label class="task"><input type="checkbox"> Image builds successfully</label></div><div class="col-md-6"><label class="task"><input type="checkbox"> Container serves the app</label></div><div class="col-md-6"><label class="task"><input type="checkbox"> Compose starts and stops app</label></div><div class="col-md-6"><label class="task"><input type="checkbox"> Tests pass locally</label></div><div class="col-md-6"><label class="task"><input type="checkbox"> Source pushed to GitHub</label></div></div><div class="progress mt-3"><div id="projectProgress" class="progress-bar bg-success" style="width:0%"></div></div><small id="projectProgressText">0 of 10 complete</small></div>
+<h3>Step 52 — Complete the project in this order</h3><div class="step-routine"><strong>Step 52 — do this now:</strong> Follow the instructions immediately below this heading. Run the commands in the order shown, or create/edit the named file if the instructions give code. Then check the result before continuing.</div><ol><li>Create the folder and Git repository.</li><li>Create the Flask app, HTML template, CSS, requirements and tests.</li><li>Run locally and verify all endpoints.</li><li>Commit source code and push it to GitHub.</li><li>Add Dockerfile and .dockerignore.</li><li>Build the image with a meaningful tag.</li><li>Run the container with a loopback-only port mapping.</li><li>Inspect logs and test endpoint responses.</li><li>Add Compose and test <code>up</code>, <code>logs</code> and <code>down</code>.</li><li>Write a README with setup, endpoints, commands and known limitations.</li><li>Optional: add GitHub Actions and publish an image after tests pass.</li></ol>
+<h3>Suggested README template</h3><pre class="code"><code># Mevi Flask Docker Starter
+
+A beginner project demonstrating Flask, Git, Docker and Compose.
+
+## Features
+- Flask home page
+- JSON health endpoint
+- Greeting API route
+- Docker image and container
+- Docker Compose workflow
+
+## Run locally
+1. Create and activate a virtual environment.
+2. Install dependencies: `python -m pip install -r requirements.txt`
+3. Run: `python app.py`
+
+## Run with Docker
+1. Build: `docker build -t mevi-flask-app:1.0 .`
+2. Start the container using `docker run`.
+3. Visit http://127.0.0.1:5000.
+
+## Tests
+Run `python -m pytest`.
+
+## Security notes
+- Never commit secrets.
+- Debug mode is for local development only.
+- Review images and dependencies before public deployment.</code><button class="copy">Copy</button></pre></section>
+
+<section id="quiz" class="content-section"><div class="kicker">CHECK YOUR UNDERSTANDING</div><h2>15. Knowledge check and official resources</h2><p>Choose one answer for each question and submit to check your score.</p><form id="quiz"><div class="question" data-answer="b"><b>1. What is a Docker image?</b><label><input type="radio" name="q1" value="a"> A running process only</label><label><input type="radio" name="q1" value="b"> A template used to create containers</label><label><input type="radio" name="q1" value="c"> A Git branch</label></div><div class="question" data-answer="c"><b>2. In -p 5000:8000, what is the host port?</b><label><input type="radio" name="q2" value="a"> 8000</label><label><input type="radio" name="q2" value="b"> Both</label><label><input type="radio" name="q2" value="c"> 5000</label></div><div class="question" data-answer="a"><b>3. Where are Flask templates stored by default?</b><label><input type="radio" name="q3" value="a"> templates/</label><label><input type="radio" name="q3" value="b"> static/</label><label><input type="radio" name="q3" value="c"> docker/</label></div><div class="question" data-answer="b"><b>4. What does .dockerignore do?</b><label><input type="radio" name="q4" value="a"> Ignores Git commits</label><label><input type="radio" name="q4" value="b"> Excludes files from the build context</label><label><input type="radio" name="q4" value="c"> Starts the daemon</label></div><div class="question" data-answer="c"><b>5. Which command shows container logs?</b><label><input type="radio" name="q5" value="a"> git log</label><label><input type="radio" name="q5" value="b"> docker image ls</label><label><input type="radio" name="q5" value="c"> docker logs NAME</label></div><button class="btn btn-primary mt-3" type="submit">Check answers</button><p id="quizResult" class="fw-bold mt-3" aria-live="polite"></p></form>
+<h3 class="mt-5">Official documentation</h3><div class="resource-grid"><a class="resource" href="https://docs.docker.com/get-started/" target="_blank" rel="noopener"><i class="bi bi-box-seam"></i><b>Docker Get Started</b><span>Images, containers and concepts</span></a><a class="resource" href="https://docs.docker.com/compose/" target="_blank" rel="noopener"><i class="bi bi-diagram-3"></i><b>Docker Compose</b><span>Multi-container apps</span></a><a class="resource" href="https://git-scm.com/doc" target="_blank" rel="noopener"><i class="bi bi-git"></i><b>Git documentation</b><span>Version control and commands</span></a><a class="resource" href="https://docs.github.com/" target="_blank" rel="noopener"><i class="bi bi-github"></i><b>GitHub Docs</b><span>Repositories and Actions</span></a><a class="resource" href="https://docs.python.org/3/tutorial/" target="_blank" rel="noopener"><i class="bi bi-filetype-py"></i><b>Python tutorial</b><span>Language fundamentals</span></a><a class="resource" href="https://flask.palletsprojects.com/" target="_blank" rel="noopener"><i class="bi bi-flask"></i><b>Flask documentation</b><span>Routing, templates and deployment</span></a><a class="resource" href="https://jinja.palletsprojects.com/" target="_blank" rel="noopener"><i class="bi bi-code-slash"></i><b>Jinja documentation</b><span>Template syntax and escaping</span></a></div><div class="callout info mt-4">Tooling changes over time. Verify installation steps and version-specific behaviour against official documentation before using commands in a production environment.</div></section>
+<footer class="footer"><div><b>MEVI TECHNOLOGIES LLP</b><p>Training · Development · Consultancy</p></div><div><a href="https://www.mevitechnologies.com/" target="_blank" rel="noopener">mevitechnologies.com</a><p>Docker · Git · Python Flask · Bootstrap</p></div></footer>
+</main></div></div>
+<button id="topBtn" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="script.js"></script>
+</body></html>
